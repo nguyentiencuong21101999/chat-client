@@ -1,0 +1,26 @@
+/* .App {
+  font-family: sans-serif;
+  height: 100vh;
+} */
+
+.sendbird-app__wrap {
+  height: 99vh;
+}
+
+.sendbird-app__conversation-wrap {
+  position: relative;
+}
+
+.typing-indicator {
+  position: absolute;
+  bottom: 5px;
+  left: 24px;
+}
+/*  */
+.app-wrapper {
+  height: calc(100vh );
+}
+
+.customized-app {
+  height: 100%;
+}
