@@ -35,6 +35,7 @@ const PasswordHook = (props) => {
       const temp = value;
       setFirstName(temp);
       Validator.isNotEmpty(name, temp, "Password is not empty.");
+      Validator.isPassword(name, temp, "Password is not valid");
       onChange(name, temp);
     } catch (e) {
       setError(e.message);

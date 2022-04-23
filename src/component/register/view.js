@@ -1,12 +1,12 @@
 import Timeout from "../../base/component/timeout";
 import Button from "../../core/button";
-import ConfirmPasswordHook from "../../core/hook/login/confirmPassword.hook";
-import EmailHook from "../../core/hook/login/email.hook";
-import FirstName from "../../core/hook/login/firstName.hook";
-import LastNameHook from "../../core/hook/login/lastName.hook";
-import PasswordHook from "../../core/hook/login/password.hook";
-import PhoneNumberHook from "../../core/hook/login/phoneNumber.hook";
-import UserNameHook from "../../core/hook/login/userName.hook";
+import ConfirmPasswordHook from "../../core/hook/register/confirmPassword.hook";
+import EmailHook from "../../core/hook/register/email.hook";
+import FirstName from "../../core/hook/register/firstName.hook";
+import LastNameHook from "../../core/hook/register/lastName.hook";
+import PasswordHook from "../../core/hook/register/password.hook";
+import PhoneNumberHook from "../../core/hook/register/phoneNumber.hook";
+import UserNameHook from "../../core/hook/register/userName.hook";
 import "./style.css";
 function Login(props) {
   const { ui, timeout, handleOnChange, handleSubmit } = props;
@@ -55,7 +55,7 @@ function Login(props) {
               onChange={handleOnChange}
               label="Email"
               disabled={timeout.status}
-              //error="sai mat khau"
+              error={timeout.field == "email" ? timeout.message : null}
               className="form-control"
             />
           </div>
@@ -68,7 +68,7 @@ function Login(props) {
               onChange={handleOnChange}
               label="Phone Number"
               disabled={timeout.status}
-              //error="sai mat khau"
+              error={timeout.field == "phoneNumber" ? timeout.message : null}
               className="form-control"
             />
           </div>
@@ -81,7 +81,7 @@ function Login(props) {
               onChange={handleOnChange}
               label="Username"
               disabled={timeout.status}
-              //error="sai mat khau"
+              error={timeout.field == "userName" ? timeout.message : null}
               className="form-control"
             />
           </div>
@@ -120,6 +120,7 @@ function Login(props) {
             }}
             //disabled={ui.isShowBtn || timeout.status}
           />
+          {timeout.field ? timeout.message : ""}
         </div>
       </div>
     </div>

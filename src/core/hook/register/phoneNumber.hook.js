@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Validator from "../../../component/service/validator";
 import Input from "../../input";
 
-const UserNameHook = (props) => {
+const PhoneNumberHook = (props) => {
   const {
     label,
     styleLabel,
@@ -34,7 +34,8 @@ const UserNameHook = (props) => {
       // const temp = value.slice(0, maxLength)
       const temp = value;
       setFirstName(temp);
-      Validator.isNotEmpty(name, temp, "Username is not empty.");
+      Validator.isNotEmpty(name, temp, "Phone Number is not empty.");
+      Validator.isPhoneNumber(name, temp, "Phone Number is not valid.");
       onChange(name, temp);
     } catch (e) {
       setError(e.message);
@@ -58,4 +59,4 @@ const UserNameHook = (props) => {
     />
   );
 };
-export default UserNameHook;
+export default PhoneNumberHook;

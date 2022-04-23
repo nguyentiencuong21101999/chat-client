@@ -15,7 +15,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import LoginComponent from "./component/login/component";
+import LoginComponent from "./component/register/component";
 import Logger from "./component/service/logger";
 
 function App() {
@@ -47,7 +47,7 @@ function App() {
           <Routes>
             <Route
               exact
-              path={"/login"}
+              path={"/register"}
               element={<LoginComponent></LoginComponent>}
             />
             {/* <Navigate to={"/login"} /> */}

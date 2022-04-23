@@ -19,6 +19,7 @@ class Timeout {
     this.funcAfterTimeout = funcAfterTimeout;
 
     this.setTimeout = this.setTimeout.bind(this);
+    this.handleResponse = this.handleResponse.bind(this);
   }
 
   setTimeout(status = true, field = "", message = "") {
@@ -48,6 +49,16 @@ class Timeout {
       }
     } catch (e) {
       Logger.error(`Timeout execute setTimeout ${e.toString()}`);
+    }
+  }
+  handleResponse(error) {
+    try {
+      Logger.debug(`handleResponse execute error `, error);
+      const code = error != null ? error.code : null;
+      console.log("============", code);
+      this.funcAfterTimeout.state.func[code]();
+    } catch (e) {
+      Logger.error(`handleResponse execute ${e.toString()}`);
     }
   }
 }
