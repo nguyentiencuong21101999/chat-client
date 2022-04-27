@@ -51,12 +51,13 @@ class Timeout {
       Logger.error(`Timeout execute setTimeout ${e.toString()}`);
     }
   }
-  handleResponse(error) {
+  handleResponse(res) {
     try {
-      Logger.debug(`handleResponse execute error `, error);
-      const code = error != null ? error.code : null;
-      console.log("============", code);
-      this.funcAfterTimeout.state.func[code]();
+      Logger.debug(`Timeout execute handleResponse with error `, res.error);
+      const code = res.error != null ? res.error.code : null;
+      if (this.funcAfterTimeout.state.func[code]) {
+        this.funcAfterTimeout.state.func[code](res.data);
+      }
     } catch (e) {
       Logger.error(`handleResponse execute ${e.toString()}`);
     }

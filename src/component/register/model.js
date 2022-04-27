@@ -5,8 +5,8 @@ class ModelView {
   password = "";
   phoneNumber = "";
   confirm_password = "";
-  userName=""
-  tokenFireBase = "tokenFirebase";
+  userName = "";
+  tokenFireBase = "";
 }
 
 class ModelRequest {

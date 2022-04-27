@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { useNavigate } from "react-router";
 import Logger from "../service/logger";
 import { ModelView, ModelRequest } from "./model";
 import View from "./view";
 import Timeout from "../../base/component/timeout";
 import { signUp } from "./action";
-
-class LoginComponent extends Component {
+import { withNavigation } from "../../base/component";
+import Firebase from "../service/firebase";
+class RegisterComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,61 +20,78 @@ class LoginComponent extends Component {
         isShowBtn: true,
       },
       func: {
-        null: this.handleLoginSuccess.bind(this),
+        null: this.handleRegisterSuccess.bind(this),
         "error.existedPhoneNumber":
-          this.handleLoginExistedPhoneNumber.bind(this),
+          this.handleRegisterExistedPhoneNumber.bind(this),
         "error.alreadyHaveWolfdenAccount":
-          this.handleLoginExistedUserName.bind(this),
-        "error.existedEmail": this.handleLoginExistedEmail.bind(this),
+          this.handleRegisterExistedUserName.bind(this),
+        "error.existedEmail": this.handleRegisterExistedEmail.bind(this),
       },
     };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleLoginSuccess = () => {
+  handleRegisterSuccess = () => {
     try {
-      Logger.info("LoginComponent execute handleLoginSuccess");
+      Logger.info("RegisterComponent execute handleLoginSuccess");
       const { timeout } = this.state;
+      const { navigate, handleNavigateWithState } = this.props;
+      handleNavigateWithState(navigate, "/login");
       timeout.setTimeout(false);
     } catch (e) {
-      Logger.error(`LoginComponent handleLoginSuccess ${e.toString()}`);
+      Logger.error(`RegisterComponent handleLoginSuccess ${e.toString()}`);
     }
   };
-  handleLoginExistedPhoneNumber = () => {
+  handleRegisterExistedPhoneNumber = () => {
     try {
-      Logger.info("LoginComponent execute handleLoginExistedPhoneNumber");
-      const { ui, timeout, data } = this.state;
+      Logger.info("RegisterComponent execute handleRegisterExistedPhoneNumber");
+      const { timeout } = this.state;
       timeout.setTimeout(false, "phoneNumber", "Phone number is existed.");
     } catch (e) {
       Logger.error(
-        `LoginComponent handleLoginExistedPhoneNumber ${e.toString()}`
+        `RegisterComponent handleRegisterExistedPhoneNumber ${e.toString()}`
       );
     }
   };
-  handleLoginExistedUserName = () => {
+  handleRegisterExistedUserName = () => {
     try {
-      Logger.info("LoginComponent execute handleLoginExistedUserName");
-      const { ui, timeout, data } = this.state;
+      Logger.info("RegisterComponent execute handleRegisterExistedUserName");
+      const { timeout } = this.state;
       timeout.setTimeout(false, "userName", "UserName is existed.");
     } catch (e) {
-      Logger.error(`LoginComponent handleLoginExistedUserName ${e.toString()}`);
+      Logger.error(
+        `RegisterComponent handleRegisterExistedUserName ${e.toString()}`
+      );
     }
   };
-  handleLoginExistedEmail = () => {
+  handleRegisterExistedEmail = () => {
     try {
-      Logger.info("LoginComponent execute handleLoginExistedEmail");
-      const { ui, timeout, data } = this.state;
+      Logger.info("RegisterComponent execute handleRegisterExistedEmail");
+      const { timeout } = this.state;
       timeout.setTimeout(false, "email", "Email is existed.");
     } catch (e) {
-      Logger.error(`LoginComponent handleLoginExistedEmail ${e.toString()}`);
+      Logger.error(
+        `RegisterComponent handleRegisterExistedEmail ${e.toString()}`
+      );
     }
   };
+  async componentDidMount() {
+    try {
+      Logger.info("LoginComponent execute componentDidMount");
+      const { data } = this.state;
+      const tokenFirebase = await Firebase.getToken();
+      data["tokenFireBase"] = tokenFirebase;
+    } catch (e) {
+      Logger.error(`LoginComponent handleRequest ${e.toString()}`);
+    }
+  }
   handleOnChange(name, value) {
     try {
-      Logger.info("LoginComponent execute handleOnChange");
+      Logger.info("RegisterComponent execute handleOnChange");
       const { data, ui } = this.state;
       data[name] = value;
       let temp = { ...data };
+      delete temp["tokenFireBase"];
       let status =
         Object.values(temp).findIndex((item) => item.toString() === "") == -1 &&
         data["confirm_password"] == data["password"];
@@ -90,18 +107,18 @@ class LoginComponent extends Component {
 
   async handleSubmit() {
     try {
-      Logger.info("LoginComponent execute handleSubmit");
-      const { ui, timeout } = this.state;
+      Logger.info("RegisterComponent execute handleSubmit");
+      const { timeout } = this.state;
       timeout.setTimeout(true);
     } catch (e) {
-      Logger.error(`LoginComponent handleSubmit ${e.toString()}`);
+      Logger.error(`RegisterComponent handleSubmit ${e.toString()}`);
       // this.state.timeout.setTimeout(false);
     }
   }
   async handleRequest() {
     try {
-      Logger.info("LoginComponent execute handleRequest");
-      const { data, func, timeout } = this.state;
+      Logger.info("RegisterComponent execute handleRequest");
+      const { data, timeout } = this.state;
       const payload = new ModelRequest()
         .setFirstName(data["firstName"])
         .setLastName(data["lastName"])
@@ -110,12 +127,11 @@ class LoginComponent extends Component {
         .setPassword(data["password"])
         .setPhoneNumber(data["phoneNumber"])
         .setTokenFirebase(data["tokenFireBase"]);
-
       const res = await signUp(payload);
-      timeout.handleResponse(res.error);
+      timeout.handleResponse(res);
       // func[res.error ? res.error.code : res.error](res);
     } catch (e) {
-      Logger.error(`LoginComponent handleRequest ${e.toString()}`);
+      Logger.error(`RegisterComponent handleRequest ${e.toString()}`);
       this.state.timeout.setTimeout(false, "all", "system busy");
     }
   }
@@ -131,7 +147,5 @@ class LoginComponent extends Component {
     );
   }
 }
-export const withNavigation = (Component) => {
-  return (props) => <Component {...props} navigate={useNavigate()} />;
-};
-export default withNavigation(LoginComponent);
+
+export default withNavigation(RegisterComponent);

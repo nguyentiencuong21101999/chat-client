@@ -1,3 +1,5 @@
+import CryptoJs from "crypto-js";
+
 export default class Helper {
   static isEmpty(value) {
     try {
@@ -8,5 +10,8 @@ export default class Helper {
     } catch (e) {
       return true;
     }
+  }
+  static hashMD5(string = '') {
+    return CryptoJs.MD5(string).toString()
   }
 }

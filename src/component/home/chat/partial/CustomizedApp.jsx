@@ -3,9 +3,8 @@ import {
   Channel as SBConversation,
   ChannelList as SBChannelList,
   ChannelSettings as SBChannelSettings,
-  MessageSearch,
 } from "sendbird-uikit";
-
+import "sendbird-uikit/dist/index.css";
 import TypingIndicator from "./CustomTypingIndicator";
 
 function CustomizedApp(props) {
@@ -14,6 +13,8 @@ function CustomizedApp(props) {
   // useState
   const [currentChannelUrl, setCurrentChannelUrl] = useState("");
   const [showSettings, setShowSettings] = useState(false);
+  const [showSearchMessage, setShowMessageSearch] = useState(false);
+
   return (
     <div className="customized-app">
       <div className="sendbird-app__wrap">
@@ -24,28 +25,26 @@ function CustomizedApp(props) {
                 setCurrentChannelUrl(channel.url);
               }
             }}
+            onProfileEditSuccess={(res) => {}}
+            sortChannelLis={(res) => {}}
+            allowProfileEdit={true}
+            disableAutoSelect={true}
           />
-        
         </div>
         <div className="sendbird-app__conversation-wrap">
           <SBConversation
-            channelUrl={currentChannelUrl}
-            onChatHeaderActionClick={() => {
-              setShowSettings(true);
+            replyType="QUOTE_REPLY"
+            disableUserProfile={true}
+            showSearchIcon={false}
+            useReaction={true}
+            onSearchClick={(e) => {
+              setShowMessageSearch(true);
             }}
+            channelUrl={currentChannelUrl}
+           
           />
           <TypingIndicator currentChannelUrl={currentChannelUrl} />
         </div>
-        {showSettings && (
-          <div className="sendbird-app__settingspanel-wrap">
-            <SBChannelSettings
-              channelUrl={currentChannelUrl}
-              onCloseClick={() => {
-                setShowSettings(false);
-              }}
-            />
-          </div>
-        )}
       </div>
     </div>
   );
