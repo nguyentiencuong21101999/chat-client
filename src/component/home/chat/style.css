@@ -1,0 +1,52 @@
+.sendbird-app__wrap {
+    height: 85vh;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  .sendbird-channel-header{
+    background-color: #ecd3ed !important;
+  }
+  .sendbird-app__channellist-wrap{
+    border-right: 1px solid var(--sendbird-light-onlight-04)
+
+  
+  }
+  .icon_back i{
+    position: absolute;
+    z-index: 99;
+    padding-top: 20px;
+    padding-left: 0px;
+    color:#742ddd;
+    font-size: 25px;
+  }
+  .icon_back i:hover{
+    color: red;
+  }
+  .sendbird-conversation .sendbird-chat-header{
+    background-color: #ecd3ed !important;
+    padding-left: 30px;
+
+  }
+  
+  .typing-indicator {
+    position: absolute;
+    bottom: 5px;
+    left: 24px;
+  }
+  /*  */
+  .app-wrapper {
+    height: calc(100vh );
+  }
+  
+  .customized-app {
+    height: 100%;
+  }
+  /* .sendbird-channel-header__right-icon {
+    display: none;
+} */
+.sendbird-place-holder__body__text{
+  display: none;
+}
+.sendbird-channel-preview:hover .sendbird-channel-preview__action{
+display:none  ;
+}

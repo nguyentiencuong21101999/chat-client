@@ -1,4 +1,4 @@
-/* @font-face {
+  /* @font-face {
   font-family: "Muli-Regular";
   src: url("../fonts/muli/Muli-Regular.ttf"); }
 @font-face {
@@ -51,7 +51,7 @@ a:hover {
   margin: auto;
   padding-top: 68px;
   padding-bottom: 48px;
-  background: url(""); }
+  }
   .inner h3 {
     text-transform: uppercase;
     font-size: 22px;
@@ -98,7 +98,7 @@ select {
   select option[value=""][disabled] {
     display: none; }
 
-button {
+.btn button {
   border: none;
   width: 152px;
   height: 40px;
@@ -124,7 +124,7 @@ button {
   transition-property: color;
   -webkit-transition-duration: 0.5s;
   transition-duration: 0.5s; }
-  button:before {
+  .btn button:before {
     content: "";
     position: absolute;
     z-index: -1;
@@ -143,7 +143,7 @@ button {
     transition-duration: 0.5s;
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out; }
-  button:hover:before {
+    .btn button:hover:before {
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
     -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
@@ -182,7 +182,10 @@ button {
     transform: translate(-50%, -50%);
     display: none;
     content: '\f26b'; }
-
+.link{
+  margin-top: 20px;
+    text-align: center;
+}
 @media (max-width: 991px) {
   .inner {
     min-width: 768px; } }
@@ -191,7 +194,9 @@ button {
     min-width: auto;
     background: none;
     padding-top: 0;
-    padding-bottom: 0; }
+    padding-bottom: 0; 
+    width: 100%;
+  }
 
   form {
     width: 100%;

@@ -1,9 +1,9 @@
 import axios from "axios";
 import { config } from "../../config";
 
-export const signUp = async (payload) => {
+export const signIn = async (payload) => {
   return await axios({
-    url: `${config.baseUrl}/users/sign-up`,
+    url: `${config.baseUrl}/users/sign-in`,
     method: "post",
     data: payload,
   })

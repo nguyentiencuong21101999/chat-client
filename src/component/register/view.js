@@ -1,4 +1,4 @@
-import Timeout from "../../base/component/timeout";
+import { Link } from "react-router-dom";
 import Button from "../../core/button";
 import ConfirmPasswordHook from "../../core/hook/register/confirmPassword.hook";
 import EmailHook from "../../core/hook/register/email.hook";
@@ -8,7 +8,7 @@ import PasswordHook from "../../core/hook/register/password.hook";
 import PhoneNumberHook from "../../core/hook/register/phoneNumber.hook";
 import UserNameHook from "../../core/hook/register/userName.hook";
 import "./style.css";
-function Login(props) {
+function Register(props) {
   const { ui, timeout, handleOnChange, handleSubmit } = props;
   return (
     <div
@@ -17,7 +17,7 @@ function Login(props) {
     >
       <div className="inner">
         <div className="form">
-          <h3>Registration Form</h3>
+          <h3>Register</h3>
           <div className="form-group">
             <div className="form-wrapper">
               <FirstName
@@ -111,19 +111,23 @@ function Login(props) {
               className="form-control"
             />
           </div>
-          <Button
-            type="button"
-            text="Register Now"
-            onClick={(e) => {
-              e.preventDefault();
-              handleSubmit();
-            }}
-            //disabled={ui.isShowBtn || timeout.status}
-          />
-          {timeout.field ? timeout.message : ""}
+          <div className="btn">
+            <Button
+              type="button"
+              text="Register Now"
+              onClick={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+              disabled={ui.isShowBtn || timeout.status}
+            />
+          </div>
+          <div className="link">
+            Already have an account? <Link to={"/login"}> Login now</Link>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-export default Login;
+export default Register;
