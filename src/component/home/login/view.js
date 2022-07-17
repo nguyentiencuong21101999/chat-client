@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
-import Button from "../../core/button";
-import PasswordHook from "../../core/hook/login/password.hook";
-import UserNameHook from "../../core/hook/login/userName.hook";
-import "../register/style.css";
+
+import PasswordHook from "../../../core/hook/login/password.hook";
+import UserNameHook from "../../../core/hook/login/userName.hook";
+import "../../register/style.css";
 function Login(props) {
   const { ui, timeout, handleOnChange, handleSubmit } = props;
 

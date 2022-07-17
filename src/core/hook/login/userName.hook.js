@@ -34,7 +34,7 @@ const UserNameHook = (props) => {
       // const temp = value.slice(0, maxLength)
       const temp = value;
       setFirstName(temp);
-      Validator.isNotEmpty(name, temp, "Username is not empty.");
+      //Validator.isNotEmpty(name, temp, "Username is not empty.");
       onChange(name, temp);
     } catch (e) {
       setError(e.message);

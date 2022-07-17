@@ -21,7 +21,7 @@ const Input = (props) => {
   const colors = !Helper.isEmpty(error) ? "#d32f2f" : "#ff8585";
   return (
     <>
-      {label ? <label style={styles}>{label}</label> : null}
+      {label ? <p style={{ ...styles, ...styleLabel }}>{label}</p> : null}
       <input
         value={value}
         type={type}

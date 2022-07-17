@@ -82,10 +82,11 @@ class App extends Component {
                     exact
                     path={"/"}
                     element={
-                      <AuthRouteUser>
-                        <HeaderComponent />
+                      // <HeaderComponent />
                         <ChatComponent />
-                      </AuthRouteUser>
+                      // <AuthRouteUser>
+
+                      // </AuthRouteUser>
                     }
                   />
                   <Route path="*" element={<Navigate to="/" />} />

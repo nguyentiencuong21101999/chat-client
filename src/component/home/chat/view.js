@@ -1,67 +1,47 @@
-import { SendBirdProvider as SBProvider } from "sendbird-uikit";
-import { ChannelList as SBChannelList } from "sendbird-uikit";
-import TypingIndicator from "./partial/CustomTypingIndicator";
 
-import "./style.css";
-import { useState } from "react";
-import ChatChannelComponent from "./partial/chatChannel";
-const APP_ID = "E6B8A398-8D36-424A-B4E7-97E03D93DC45";
+import './style.css'
+
+import Button from '../../../core/button';
+import Login from '../login/component';
 function ChatView(props) {
-  const { profile, handleBeforeSendUserMessage, handelOnChannelSelect } = props;
-  const [currentChannelUrl, setCurrentChannelUrl] = useState("");
-  const [showMessage, setShowMesage] = useState(false);
+  const { ui } = props
   return (
-    <>
-      <SBProvider
-        appId={APP_ID}
-        userId={profile.userName}
-        nickname={profile.fullName}
-        // profileUrl={profile.profileUrl}
-      >
-        <div className="customized-app">
-          <div className="sendbird-app__wrap">
-            <div className="sendbird-app__channellist-wrap">
-              {!showMessage && (
-                <SBChannelList
-                  onChannelSelect={(channel) => {
-                    const [user] = channel.members.filter(
-                      (e) => e.userId !== profile.userName
-                    );
-                    handelOnChannelSelect(user.userId);
-                    if (channel && channel.url) {
-                      setCurrentChannelUrl(channel.url);
-                      setShowMesage(true);
-                    }
-                  }}
-                  onProfileEditSuccess={(res) => {}}
-                  sortChannelLis={(res) => {}}
-                  allowProfileEdit={true}
-                  disableAutoSelect={true}
-                />
-              )}
-            </div>
-            {showMessage && (
-              <>
-                <div
-                  className="icon_back"
-                  onClick={() => {
-                    setShowMesage(false);
-                  }}
-                >
-                  <i className="fa fa-hand-o-left" aria-hidden="flase"></i>
+    <div className="home">
+      <div className="home-bar">
+        {ui.modulesList.map(e =>
+        (
+          <div className='bar-detail'>
+            <p className='bar-name'>{e.name}</p>
+            {e.childModulesList.map(e => (
+              <div className='childModules' >
+                <div className='childModules_name'>{e.name}</div>
+                <div className='childModules_params'>  <Login /></div>
+                <div className='childModules_submit'>
+                  <p>M : {e.method}</p>
+                  <div className='childModules_submit_btn' >
+                    <Button
+                      style={{ fontSize: "20px" }}
+                      type="button"
+                      text="submit"
+                      onClick={(e) => {
+                        e.preventDefault();
+
+                      }}
+                    />
+                  </div>
                 </div>
-                <ChatChannelComponent
-                  currentChannelUrl={currentChannelUrl}
-                  handleBeforeSendUserMessage={handleBeforeSendUserMessage}
-                />
-                <TypingIndicator currentChannelUrl={currentChannelUrl} />
-              </>
-            )}
-            {/* <div className="sendbird-app__conversation-wrap"></div> */}
-          </div>
+              </div>
+            ))}
+
+          </div>)
+        )}
+      </div>
+      <div className="home-response">
+        <div className='response'>
+
         </div>
-      </SBProvider>
-    </>
-  );
+      </div>
+    </div>
+  )
 }
 export default ChatView;
