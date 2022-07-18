@@ -70,7 +70,6 @@ class LoginComponent extends Component {
       Logger.info("LoginComponent execute componentDidMount");
       const { data } = this.state;
       const tokenFirebase = await Firebase.getToken();
-      console.log(tokenFirebase);
       data["tokenFireBase"] = tokenFirebase ?? null;
     } catch (e) {
       Logger.error(`LoginComponent handleRequest ${e.toString()}`);

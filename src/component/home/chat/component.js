@@ -4,7 +4,10 @@ import Timeout from "../../../base/component/timeout";
 import { ModelView } from "../../login/model";
 import auth from "../../service/auth";
 import Logger from "../../service/logger";
+
 import View from "./view";
+//render component
+import Login from "../login/component";
 class HomeComponent extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +29,9 @@ class HomeComponent extends Component {
               userName: "",
               password: ""
             },
-            method: "POST"
+            method: "POST",
+            component: (props) => < Login props={props} />
+
           }]
         },
         {
@@ -37,7 +42,8 @@ class HomeComponent extends Component {
               userName: "",
               password: ""
             },
-            method: "POST"
+            method: "POST",
+            //component: (props) => < Login props={props} />
           }]
         }]
       },

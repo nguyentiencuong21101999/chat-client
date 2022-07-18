@@ -26,7 +26,6 @@ class Firebase {
     try {
       Logger.info("Firebase execute function getToken");
       const msg = this.firebase.messaging();
-      console.log(firebase.messaging.isSupported());
       return firebase.messaging.isSupported() ? await msg.getToken() : null;
     } catch (err) {
       Logger.info(err);

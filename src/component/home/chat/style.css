@@ -2,6 +2,7 @@
   max-width: 1340px;
   display: grid;
   grid-template-columns: 587px 753px;
+  color: black;
  }
  .home-bar{
    border: 1px solid;
@@ -46,4 +47,15 @@
  /* response */
  .home-response{
   margin-left: 2px;
+ }
+ .response{
+  padding: 5px;
+  font-size: 15px;
+  position: absolute;
+    border: 1px solid ;
+    width: 753px; 
+    height: 606px; 
+ }
+ .response p{
+  margin-top: 2px;
  }
